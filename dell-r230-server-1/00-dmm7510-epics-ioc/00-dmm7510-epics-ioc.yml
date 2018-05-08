@@ -5,6 +5,7 @@ services:
     image: dockerregistry.lnls-sirius.com.br/dmm7510-epics-ioc:${IMAGE_VERSION}
     container_name: dmm7510-epics-ioc-${DMM7510_INSTANCE}
     command: "\
+        -t ${DMM7510_TELNET_PORT} \
         -i ${DMM7510_IP} \
         -p ${DMM7510_PORT} \
         -d ${DMM7510_INSTANCE} \

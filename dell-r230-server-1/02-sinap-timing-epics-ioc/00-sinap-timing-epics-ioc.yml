@@ -5,6 +5,7 @@ services:
     image: dockerregistry.lnls-sirius.com.br/sinap-timing-epics-ioc:${IMAGE_VERSION}
     container_name: sinap-timing-epics-ioc-${SINAP_TIMING_INSTANCE}
     command: "\
+        -t ${SINAP_TIMING_TELNET_PORT} \
         -i ${SINAP_TIMING_IP} \
         -p ${SINAP_TIMING_PORT} \
         -d ${SINAP_TIMING_INSTANCE} \
