@@ -1,0 +1,98 @@
+version: '3.4'
+
+services:
+  galil-dmc30017-in-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/galil-dmc30017-epics-ioc:${DMC30017_IN_IMAGE_VERSION}
+    container_name: galil-dmc30017-epics-ioc-${DMC30017_IN_INSTANCE}
+    command: "\
+        -t \"${DMC30017_IN_TELNET_PORT}\" \
+        -i \"${DMC30017_IN_DEVICE_IP}\" \
+        -p \"${DMC30017_IN_DEVICE_PORT}\" \
+        -P \"${DMC30017_IN_PV_AREA_PREFIX}\" \
+        -R \"${DMC30017_IN_PV_DEVICE_PREFIX}\" \
+        -s \"${DMC30017_IN_VELO}\" \
+        -x \"${DMC30017_IN_VMAX}\" \
+        -a \"${DMC30017_IN_ACCL}\" \
+        -d \"${DMC30017_IN_BDST}\" \
+        -v \"${DMC30017_IN_BVEL}\" \
+        -c \"${DMC30017_IN_BACC}\" \
+        -r \"${DMC30017_IN_MRES}\" \
+        -t \"${DMC30017_IN_SREV}\" \
+        -e \"${DMC30017_IN_ERES}\" \
+        -h \"${DMC30017_IN_DHLM}\" \
+        -l \"${DMC30017_IN_DLLM}\" \
+        -o \"${DMC30017_IN_OFF}\" \
+        -u \"${DMC30017_IN_UEIP}\" \
+        -y \"${DMC30017_IN_RTRY}\" \
+        -n \"${DMC30017_IN_NTM}\" \
+        -m \"${DMC30017_IN_MTRTYPE}\" \
+        -k \"${DMC30017_IN_MTRON}\" \
+        -g \"${DMC30017_IN_EGU}\" \
+        -w \"${DMC30017_IN_DEFAULT_HOMETYPE}\" \
+        -z \"${DMC30017_IN_DEFAULT_LIMITTYPE}\" \
+        -G \"${DMC30017_IN_AMP_GAIN}\"
+        -D \"${DMC30017_IN_DIR}\" \
+        -E \"${DMC30017_IN_ENC_TYPE}\" "
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/galil-dmc30017-epics-ioc/iocBoot/iocGalilDmc30017/autosave
+    network_mode: "host"
+
+  galil-dmc30017-out-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/galil-dmc30017-epics-ioc:${DMC30017_OUT_IMAGE_VERSION}
+    container_name: galil-dmc30017-epics-ioc-${DMC30017_OUT_INSTANCE}
+    command: "\
+        -t \"${DMC30017_OUT_TELNET_PORT}\" \
+        -i \"${DMC30017_OUT_DEVICE_IP}\" \
+        -p \"${DMC30017_OUT_DEVICE_PORT}\" \
+        -P \"${DMC30017_OUT_PV_AREA_PREFIX}\" \
+        -R \"${DMC30017_OUT_PV_DEVICE_PREFIX}\" \
+        -s \"${DMC30017_OUT_VELO}\" \
+        -x \"${DMC30017_OUT_VMAX}\" \
+        -a \"${DMC30017_OUT_ACCL}\" \
+        -d \"${DMC30017_OUT_BDST}\" \
+        -v \"${DMC30017_OUT_BVEL}\" \
+        -c \"${DMC30017_OUT_BACC}\" \
+        -r \"${DMC30017_OUT_MRES}\" \
+        -t \"${DMC30017_OUT_SREV}\" \
+        -e \"${DMC30017_OUT_ERES}\" \
+        -h \"${DMC30017_OUT_DHLM}\" \
+        -l \"${DMC30017_OUT_DLLM}\" \
+        -o \"${DMC30017_OUT_OFF}\" \
+        -u \"${DMC30017_OUT_UEIP}\" \
+        -y \"${DMC30017_OUT_RTRY}\" \
+        -n \"${DMC30017_OUT_NTM}\" \
+        -m \"${DMC30017_OUT_MTRTYPE}\" \
+        -k \"${DMC30017_OUT_MTRON}\" \
+        -g \"${DMC30017_OUT_EGU}\" \
+        -w \"${DMC30017_OUT_DEFAULT_HOMETYPE}\" \
+        -z \"${DMC30017_OUT_DEFAULT_LIMITTYPE}\" \
+        -G \"${DMC30017_OUT_AMP_GAIN}\"
+        -D \"${DMC30017_OUT_DIR}\" \
+        -E \"${DMC30017_OUT_ENC_TYPE}\" "
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/galil-dmc30017-epics-ioc/iocBoot/iocGalilDmc30017/autosave
+    network_mode: "host"
+
+  diff-ctrl-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/diff-ctrl-epics-ioc:${SCRAPER_IMAGE_VERSION}
+    container_name: diff-ctrl-epics-ioc-${SCRAPER_INSTANCE}
+    command: "\
+        -t \"${SCRAPER_TELNET_PORT}\" \
+        -l \"${SCRAPER_IN_CTRL_PREFIX}\" \
+        -r \"${SCRAPER_OUT_CTRL_PREFIX}\" \
+        -P \"${SCRAPER_AREA_PREFIX}\" \
+        -R \"${SCRAPER_DEVICE_PREFIX}\" \
+        -g \"${SCRAPER_EGU}\" "
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/diff-ctrl-epics-ioc/iocBoot/iocDiffCtrl/autosave
+    network_mode: "host"
+    depends_on:
+      - galil-dmc30017-in-epics-ioc
+      - galil-dmc30017-out-epics-ioc
+
