@@ -1,0 +1,74 @@
+version: '3.4'
+
+services:
+  galil-dmc30017-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/galil-dmc30017-epics-ioc:${DMC30017_IMAGE_VERSION}
+    container_name: galil-dmc30017-epics-ioc-${DMC30017_INSTANCE}
+    command: "\
+        -t \"${DMC30017_TELNET_PORT}\" \
+        -i \"${DMC30017_DEVICE_IP}\" \
+        -p \"${DMC30017_DEVICE_PORT}\" \
+        -P \"${DMC30017_AREA_PREFIX}\" \
+        -R \"${DMC30017_DEVICE_PREFIX}\" \
+        -s \"${DMC30017_VELO}\" \
+        -x \"${DMC30017_VMAX}\" \
+        -a \"${DMC30017_ACCL}\" \
+        -d \"${DMC30017_BDST}\" \
+        -v \"${DMC30017_BVEL}\" \
+        -c \"${DMC30017_BACC}\" \
+        -r \"${DMC30017_MRES}\" \
+        -t \"${DMC30017_SREV}\" \
+        -e \"${DMC30017_ERES}\" \
+        -h \"${DMC30017_DHLM}\" \
+        -l \"${DMC30017_DLLM}\" \
+        -o \"${DMC30017_OFF}\" \
+        -u \"${DMC30017_UEIP}\" \
+        -y \"${DMC30017_RTRY}\" \
+        -n \"${DMC30017_NTM}\" \
+        -m \"${DMC30017_MTRTYPE}\" \
+        -k \"${DMC30017_MTRON}\" \
+        -g \"${DMC30017_EGU}\" \
+        -w \"${DMC30017_DEFAULT_HOMETYPE}\" \
+        -z \"${DMC30017_DEFAULT_LIMITTYPE}\" \
+        -G \"${DMC30017_AMP_GAIN}\"
+        -D \"${DMC30017_DIR}\" \
+        -E \"${DMC30017_ENC_TYPE}\" "
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/galil-dmc30017-epics-ioc/iocBoot/iocGalilDmc30017/autosave
+    network_mode: "host"
+
+  basler-aca1300-75gm-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/basler-aca1300-75gm-epics-ioc:${BASLER_ACA1300_75GM_IMAGE_VERSION}
+    container_name: basler-aca1300-75gm-epics-ioc-${BASLER_ACA1300_75GM_INSTANCE}
+    command: "\
+        -t \"${BASLER_ACA1300_75GM_TELNET_PORT}\" \
+        -s \"${BASLER_ACA1300_75GM_SN}\" \
+        -A \"${BASLER_ACA1300_75GM_HL_PREFIX}\" \
+        -P \"${BASLER_ACA1300_75GM_AREA_PREFIX}\" \
+        -R \"${BASLER_ACA1300_75GM_DEVICE_PREFIX}\" "
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/basler-acA1300-75gm-epics-ioc/iocBoot/iocBasleracA130075gm/autosave
+    network_mode: "host"
+
+  screen-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/screen-epics-ioc:${SCREEN_IMAGE_VERSION}
+    container_name: screen-epics-ioc-${SCREEN_INSTANCE}
+    command: "\
+        -t \"${SCREEN_TELNET_PORT}\" \
+        -m \"${SCREEN_MTR_CTRL_PREFIX}\" \
+        -c \"${SCREEN_CAM_PREFIX}\" \
+        -P \"${SCREEN_AREA_PREFIX}\" \
+        -R \"${SCREEN_DEVICE_PREFIX}\" "
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/basler-acA1300-75gm-epics-ioc/iocBoot/iocScreen/autosave
+    network_mode: "host"
+    depends_on:
+      - galil-dmc30017-epics-ioc
+      - basler-aca1300-75gm-epics-ioc
+
