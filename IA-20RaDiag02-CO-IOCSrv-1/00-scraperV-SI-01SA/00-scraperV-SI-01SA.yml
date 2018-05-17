@@ -8,8 +8,8 @@ services:
         -t \"${DMC30017_BOTTOM_TELNET_PORT}\" \
         -i \"${DMC30017_BOTTOM_DEVICE_IP}\" \
         -p \"${DMC30017_BOTTOM_DEVICE_PORT}\" \
-        -P \"${DMC30017_BOTTOM_PV_AREA_PREFIX}\" \
-        -R \"${DMC30017_BOTTOM_PV_DEVICE_PREFIX}\" \
+        -P \"${DMC30017_BOTTOM_AREA_PREFIX}\" \
+        -R \"${DMC30017_BOTTOM_DEVICE_PREFIX}\" \
         -s \"${DMC30017_BOTTOM_VELO}\" \
         -x \"${DMC30017_BOTTOM_VMAX}\" \
         -a \"${DMC30017_BOTTOM_ACCL}\" \
@@ -46,8 +46,8 @@ services:
         -t \"${DMC30017_TOP_TELNET_PORT}\" \
         -i \"${DMC30017_TOP_DEVICE_IP}\" \
         -p \"${DMC30017_TOP_DEVICE_PORT}\" \
-        -P \"${DMC30017_TOP_PV_AREA_PREFIX}\" \
-        -R \"${DMC30017_TOP_PV_DEVICE_PREFIX}\" \
+        -P \"${DMC30017_TOP_AREA_PREFIX}\" \
+        -R \"${DMC30017_TOP_DEVICE_PREFIX}\" \
         -s \"${DMC30017_TOP_VELO}\" \
         -x \"${DMC30017_TOP_VMAX}\" \
         -a \"${DMC30017_TOP_ACCL}\" \
