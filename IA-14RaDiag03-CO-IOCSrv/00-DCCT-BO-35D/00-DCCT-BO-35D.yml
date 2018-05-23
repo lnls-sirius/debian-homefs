@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   dmm7510-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/dmm7510-epics-ioc:${IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/dmm7510-epics-ioc:${IMAGE_VERSION}
     container_name: dmm7510-epics-ioc-${DMM7510_INSTANCE}
     command: "\
         -t ${DMM7510_TELNET_PORT} \

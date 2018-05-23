@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   galil-dmc30017-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/galil-dmc30017-epics-ioc:${DMC30017_IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/galil-dmc30017-epics-ioc:${DMC30017_IMAGE_VERSION}
     container_name: galil-dmc30017-epics-ioc-${DMC30017_INSTANCE}
     command: "\
         -t \"${DMC30017_TELNET_PORT}\" \
@@ -40,7 +40,7 @@ services:
     network_mode: "host"
 
   basler-aca1300-75gm-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/basler-aca1300-75gm-epics-ioc:${BASLER_ACA1300_75GM_IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/basler-aca1300-75gm-epics-ioc:${BASLER_ACA1300_75GM_IMAGE_VERSION}
     container_name: basler-aca1300-75gm-epics-ioc-${BASLER_ACA1300_75GM_INSTANCE}
     command: "\
         -t \"${BASLER_ACA1300_75GM_TELNET_PORT}\" \
@@ -55,7 +55,7 @@ services:
     network_mode: "host"
 
   screen-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/screen-epics-ioc:${SCREEN_IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/screen-epics-ioc:${SCREEN_IMAGE_VERSION}
     container_name: screen-epics-ioc-${SCREEN_INSTANCE}
     command: "\
         -t \"${SCREEN_TELNET_PORT}\" \

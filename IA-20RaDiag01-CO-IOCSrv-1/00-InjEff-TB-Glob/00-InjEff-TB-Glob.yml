@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   dmm7510-epics-ioc-1:
-    image: dockerregistry.lnls-sirius.com.br/dmm7510-epics-ioc:${DMM7510_1_IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/dmm7510-epics-ioc:${DMM7510_1_IMAGE_VERSION}
     container_name: dmm7510-epics-ioc-${DMM7510_1_INSTANCE}
     command: "\
         -t \"${DMM7510_1_TELNET_PORT}\" \
@@ -19,7 +19,7 @@ services:
     network_mode: "host"
 
   dmm7510-epics-ioc-2:
-    image: dockerregistry.lnls-sirius.com.br/dmm7510-epics-ioc:${DMM7510_2_IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/dmm7510-epics-ioc:${DMM7510_2_IMAGE_VERSION}
     container_name: dmm7510-epics-ioc-${DMM7510_2_INSTANCE}
     command: "\
         -t \"${DMM7510_2_TELNET_PORT}\" \
@@ -36,7 +36,7 @@ services:
     network_mode: "host"
 
   inj-efficiency-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/inj-efficiency-epics-ioc:${INJEFF_IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/inj-efficiency-epics-ioc:${INJEFF_IMAGE_VERSION}
     container_name: inj-efficiency-epics-ioc-${INJEFF_INSTANCE}
     command: "\
         -t \"${INJEFF_TELNET_PORT}\" \

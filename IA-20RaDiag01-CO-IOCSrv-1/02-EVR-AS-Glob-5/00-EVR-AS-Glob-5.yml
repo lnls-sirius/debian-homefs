@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   sinap-timing-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/sinap-timing-epics-ioc:${IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/sinap-timing-epics-ioc:${IMAGE_VERSION}
     container_name: sinap-timing-epics-ioc-${SINAP_TIMING_INSTANCE}
     command: "\
         -t ${SINAP_TIMING_TELNET_PORT} \

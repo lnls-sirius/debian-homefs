@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   galil-dmc30017-top-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/galil-dmc30017-epics-ioc:${DMC30017_TOP_IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/galil-dmc30017-epics-ioc:${DMC30017_TOP_IMAGE_VERSION}
     container_name: galil-dmc30017-epics-ioc-${DMC30017_TOP_INSTANCE}
     command: "\
         -t \"${DMC30017_TOP_TELNET_PORT}\" \
@@ -40,7 +40,7 @@ services:
     network_mode: "host"
 
   galil-dmc30017-bottom-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/galil-dmc30017-epics-ioc:${DMC30017_BOTTOM_IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/galil-dmc30017-epics-ioc:${DMC30017_BOTTOM_IMAGE_VERSION}
     container_name: galil-dmc30017-epics-ioc-${DMC30017_BOTTOM_INSTANCE}
     command: "\
         -t \"${DMC30017_BOTTOM_TELNET_PORT}\" \
@@ -78,7 +78,7 @@ services:
     network_mode: "host"
 
   diff-ctrl-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/diff-ctrl-epics-ioc:${SLIT_IMAGE_VERSION}
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/diff-ctrl-epics-ioc:${SLIT_IMAGE_VERSION}
     container_name: diff-ctrl-epics-ioc-${SLIT_INSTANCE}
     command: "\
         -t \"${SLIT_TELNET_PORT}\" \
