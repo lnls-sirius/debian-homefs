@@ -17,7 +17,7 @@ services:
         -v \"${DMC30017_TOP_BVEL}\" \
         -c \"${DMC30017_TOP_BACC}\" \
         -r \"${DMC30017_TOP_MRES}\" \
-        -t \"${DMC30017_TOP_SREV}\" \
+        -T \"${DMC30017_TOP_SREV}\" \
         -e \"${DMC30017_TOP_ERES}\" \
         -h \"${DMC30017_TOP_DHLM}\" \
         -l \"${DMC30017_TOP_DLLM}\" \
@@ -55,7 +55,7 @@ services:
         -v \"${DMC30017_BOTTOM_BVEL}\" \
         -c \"${DMC30017_BOTTOM_BACC}\" \
         -r \"${DMC30017_BOTTOM_MRES}\" \
-        -t \"${DMC30017_BOTTOM_SREV}\" \
+        -T \"${DMC30017_BOTTOM_SREV}\" \
         -e \"${DMC30017_BOTTOM_ERES}\" \
         -h \"${DMC30017_BOTTOM_DHLM}\" \
         -l \"${DMC30017_BOTTOM_DLLM}\" \

@@ -17,7 +17,7 @@ services:
         -v \"${DMC30017_IN_BVEL}\" \
         -c \"${DMC30017_IN_BACC}\" \
         -r \"${DMC30017_IN_MRES}\" \
-        -t \"${DMC30017_IN_SREV}\" \
+        -T \"${DMC30017_IN_SREV}\" \
         -e \"${DMC30017_IN_ERES}\" \
         -h \"${DMC30017_IN_DHLM}\" \
         -l \"${DMC30017_IN_DLLM}\" \
@@ -55,7 +55,7 @@ services:
         -v \"${DMC30017_OUT_BVEL}\" \
         -c \"${DMC30017_OUT_BACC}\" \
         -r \"${DMC30017_OUT_MRES}\" \
-        -t \"${DMC30017_OUT_SREV}\" \
+        -T \"${DMC30017_OUT_SREV}\" \
         -e \"${DMC30017_OUT_ERES}\" \
         -h \"${DMC30017_OUT_DHLM}\" \
         -l \"${DMC30017_OUT_DLLM}\" \

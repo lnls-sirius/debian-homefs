@@ -17,7 +17,7 @@ services:
         -v \"${DMC30017_BVEL}\" \
         -c \"${DMC30017_BACC}\" \
         -r \"${DMC30017_MRES}\" \
-        -t \"${DMC30017_SREV}\" \
+        -T \"${DMC30017_SREV}\" \
         -e \"${DMC30017_ERES}\" \
         -h \"${DMC30017_DHLM}\" \
         -l \"${DMC30017_DLLM}\" \
