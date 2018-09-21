@@ -1,0 +1,65 @@
+version: '3.4'
+
+services:
+  rsfsl-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/rsfsl-epics-ioc:${TUNE_PROC_IMAGE_VERSION}
+    container_name: rsfsl-epics-ioc-${TUNE_PROC_INSTANCE}
+    command: "\
+        -t ${TUNE_PROC_TELNET_PORT} \
+        -i ${TUNE_PROC_IP} \
+        -p ${TUNE_PROC_PORT} \
+        -P ${TUNE_PROC_AREA_PREFIX} \
+        -R ${TUNE_PROC_DEVICE_PREFIX}"
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/rsfsl-epics-ioc/iocBoot/iocrsfsl/autosave
+    network_mode: "host"
+
+  valon5009-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/valon5009-epics-ioc:${CARRIER_GEN_IMAGE_VERSION}
+    container_name: valon5009-epics-ioc-${CARRIER_GEN_INSTANCE}
+    command: "\
+        -t ${CARRIER_GEN_TELNET_PORT} \
+        -p ${CARRIER_GEN_SERIAL_PORT} \
+        -P ${CARRIER_GEN_AREA_PREFIX} \
+        -R ${CARRIER_GEN_DEVICE_PREFIX}"
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/valon5009-epics-ioc/iocBoot/iocValon5009/autosave
+    network_mode: "host"
+
+  agilent33521a-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/agilent33521a-epics-ioc:${NOISE_GEN_IMAGE_VERSION}
+    container_name: agilent33521a-epics-ioc-${NOISE_GEN_INSTANCE}
+    command: "\
+        -t ${NOISE_GEN_TELNET_PORT} \
+        -i ${NOISE_GEN_IP} \
+        -p ${NOISE_GEN_PORT} \
+        -P ${NOISE_GEN_AREA_PREFIX} \
+        -R ${NOISE_GEN_DEVICE_PREFIX}"
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/agilent33521a-epics-ioc/iocBoot/iocagilent33521a/autosave
+    network_mode: "host"
+
+  noise-src-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/noise-src-epics-ioc:${NOISE_SRC_IMAGE_VERSION}
+    container_name: noise-src-epics-ioc-${NOISE_SRC_INSTANCE}
+    command: "\
+        -t ${NOISE_SRC_TELNET_PORT} \
+        -n ${NOISE_SRC_NOISE_GEN} \
+        -c ${NOISE_SRC_CARRIER_GEN} \
+        -P ${NOISE_SRC_AREA_PREFIX} \
+        -R ${NOISE_SRC_DEVICE_PREFIX}"
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/noise-src-epics-ioc/iocBoot/iocNoiseSrc/autosave
+    network_mode: "host"
+    depends_on:
+      - valon5009-epics-ioc
+      - agilent33521a-epics-ioc
+
