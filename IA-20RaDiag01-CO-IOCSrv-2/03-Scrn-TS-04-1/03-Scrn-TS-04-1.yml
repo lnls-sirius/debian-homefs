@@ -30,9 +30,16 @@ services:
         -g \"${DMC30017_EGU}\" \
         -w \"${DMC30017_DEFAULT_HOMETYPE}\" \
         -z \"${DMC30017_DEFAULT_LIMITTYPE}\" \
-        -G \"${DMC30017_AMP_GAIN}\"
+        -G \"${DMC30017_AMP_GAIN}\" \
         -D \"${DMC30017_DIR}\" \
-        -E \"${DMC30017_ENC_TYPE}\" "
+        -E \"${DMC30017_ENC_TYPE}\" \
+        -O \"${DMC30017_BISS_POOL}\" \
+        -C \"${DMC30017_BISS_CLKDIV}\" \
+        -A \"${DMC30017_BISS_DATA1}\" \
+        -B \"${DMC30017_BISS_DATA2}\" \
+        -Z \"${DMC30017_BISS_ZEROPAD}\" \
+        -I \"${DMC30017_BISS_INPUT}\" \
+        -L \"${DMC30017_BISS_LEVEL}\" "
     volumes:
       - type: bind
         source: /media/autosave
