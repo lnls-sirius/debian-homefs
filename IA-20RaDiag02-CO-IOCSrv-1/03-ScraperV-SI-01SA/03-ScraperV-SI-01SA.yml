@@ -30,9 +30,16 @@ services:
         -g \"${DMC30017_BOTTOM_EGU}\" \
         -w \"${DMC30017_BOTTOM_DEFAULT_HOMETYPE}\" \
         -z \"${DMC30017_BOTTOM_DEFAULT_LIMITTYPE}\" \
-        -G \"${DMC30017_BOTTOM_AMP_GAIN}\"
+        -G \"${DMC30017_BOTTOM_AMP_GAIN}\" \
         -D \"${DMC30017_BOTTOM_DIR}\" \
-        -E \"${DMC30017_BOTTOM_ENC_TYPE}\" "
+        -E \"${DMC30017_BOTTOM_ENC_TYPE}\" \
+        -O \"${DMC30017_BOTTOM_BISS_POOL}\" \
+        -C \"${DMC30017_BOTTOM_BISS_CLKDIV}\" \
+        -A \"${DMC30017_BOTTOM_BISS_DATA1}\" \
+        -B \"${DMC30017_BOTTOM_BISS_DATA2}\" \
+        -Z \"${DMC30017_BOTTOM_BISS_ZEROPAD}\" \
+        -I \"${DMC30017_BOTTOM_BISS_INPUT}\" \
+        -L \"${DMC30017_BOTTOM_BISS_LEVEL}\" "
     volumes:
       - type: bind
         source: /media/autosave
@@ -68,9 +75,16 @@ services:
         -g \"${DMC30017_TOP_EGU}\" \
         -w \"${DMC30017_TOP_DEFAULT_HOMETYPE}\" \
         -z \"${DMC30017_TOP_DEFAULT_LIMITTYPE}\" \
-        -G \"${DMC30017_TOP_AMP_GAIN}\"
+        -G \"${DMC30017_TOP_AMP_GAIN}\" \
         -D \"${DMC30017_TOP_DIR}\" \
-        -E \"${DMC30017_TOP_ENC_TYPE}\" "
+        -E \"${DMC30017_TOP_ENC_TYPE}\" \
+        -O \"${DMC30017_TOP_BISS_POOL}\" \
+        -C \"${DMC30017_TOP_BISS_CLKDIV}\" \
+        -A \"${DMC30017_TOP_BISS_DATA1}\" \
+        -B \"${DMC30017_TOP_BISS_DATA2}\" \
+        -Z \"${DMC30017_TOP_BISS_ZEROPAD}\" \
+        -I \"${DMC30017_TOP_BISS_INPUT}\" \
+        -L \"${DMC30017_TOP_BISS_LEVEL}\" "
     volumes:
       - type: bind
         source: /media/autosave
@@ -82,10 +96,12 @@ services:
     container_name: diff-ctrl-epics-ioc-${SCRAPER_INSTANCE}
     command: "\
         -t \"${SCRAPER_TELNET_PORT}\" \
-        -l \"${SCRAPER_BOTTOM_CTRL_PREFIX}\" \
-        -r \"${SCRAPER_TOP_CTRL_PREFIX}\" \
+        -p \"${SCRAPER_TOP_CTRL_PREFIX}\" \
+        -n \"${SCRAPER_BOTTOM_CTRL_PREFIX}\" \
         -P \"${SCRAPER_AREA_PREFIX}\" \
         -R \"${SCRAPER_DEVICE_PREFIX}\" \
+        -l \"${SCRAPER_LOW_LIM}\" \
+        -h \"${SCRAPER_HIGH_LIM}\" \
         -g \"${SCRAPER_EGU}\" "
     volumes:
       - type: bind

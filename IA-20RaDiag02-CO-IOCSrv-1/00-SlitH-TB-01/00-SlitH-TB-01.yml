@@ -30,9 +30,16 @@ services:
         -g \"${DMC30017_IN_EGU}\" \
         -w \"${DMC30017_IN_DEFAULT_HOMETYPE}\" \
         -z \"${DMC30017_IN_DEFAULT_LIMITTYPE}\" \
-        -G \"${DMC30017_IN_AMP_GAIN}\"
+        -G \"${DMC30017_IN_AMP_GAIN}\" \
         -D \"${DMC30017_IN_DIR}\" \
-        -E \"${DMC30017_IN_ENC_TYPE}\" "
+        -E \"${DMC30017_IN_ENC_TYPE}\" \
+        -O \"${DMC30017_IN_BISS_POOL}\" \
+        -C \"${DMC30017_IN_BISS_CLKDIV}\" \
+        -A \"${DMC30017_IN_BISS_DATA1}\" \
+        -B \"${DMC30017_IN_BISS_DATA2}\" \
+        -Z \"${DMC30017_IN_BISS_ZEROPAD}\" \
+        -I \"${DMC30017_IN_BISS_INPUT}\" \
+        -L \"${DMC30017_IN_BISS_LEVEL}\" "
     volumes:
       - type: bind
         source: /media/autosave
@@ -68,9 +75,16 @@ services:
         -g \"${DMC30017_OUT_EGU}\" \
         -w \"${DMC30017_OUT_DEFAULT_HOMETYPE}\" \
         -z \"${DMC30017_OUT_DEFAULT_LIMITTYPE}\" \
-        -G \"${DMC30017_OUT_AMP_GAIN}\"
+        -G \"${DMC30017_OUT_AMP_GAIN}\" \
         -D \"${DMC30017_OUT_DIR}\" \
-        -E \"${DMC30017_OUT_ENC_TYPE}\" "
+        -E \"${DMC30017_OUT_ENC_TYPE}\" \
+        -O \"${DMC30017_IN_BISS_POOL}\" \
+        -C \"${DMC30017_IN_BISS_CLKDIV}\" \
+        -A \"${DMC30017_IN_BISS_DATA1}\" \
+        -B \"${DMC30017_IN_BISS_DATA2}\" \
+        -Z \"${DMC30017_IN_BISS_ZEROPAD}\" \
+        -I \"${DMC30017_IN_BISS_INPUT}\" \
+        -L \"${DMC30017_IN_BISS_LEVEL}\" "
     volumes:
       - type: bind
         source: /media/autosave
@@ -82,10 +96,12 @@ services:
     container_name: diff-ctrl-epics-ioc-${SLIT_INSTANCE}
     command: "\
         -t \"${SLIT_TELNET_PORT}\" \
-        -l \"${SLIT_IN_CTRL_PREFIX}\" \
-        -r \"${SLIT_OUT_CTRL_PREFIX}\" \
+        -p \"${SLIT_IN_CTRL_PREFIX}\" \
+        -n \"${SLIT_OUT_CTRL_PREFIX}\" \
         -P \"${SLIT_AREA_PREFIX}\" \
         -R \"${SLIT_DEVICE_PREFIX}\" \
+        -l \"${SLIT_LOW_LIM}\" \
+        -h \"${SLIT_HIGH_LIM}\" \
         -g \"${SLIT_EGU}\" "
     volumes:
       - type: bind
