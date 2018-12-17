@@ -96,8 +96,8 @@ services:
     container_name: diff-ctrl-epics-ioc-${SCRAPER_INSTANCE}
     command: "\
         -t \"${SCRAPER_TELNET_PORT}\" \
-        -p \"${SCRAPER_IN_CTRL_PREFIX}\" \
-        -n \"${SCRAPER_OUT_CTRL_PREFIX}\" \
+        -p \"${SCRAPER_OUT_CTRL_PREFIX}\" \
+        -n \"${SCRAPER_IN_CTRL_PREFIX}\" \
         -P \"${SCRAPER_AREA_PREFIX}\" \
         -R \"${SCRAPER_DEVICE_PREFIX}\" \
         -l \"${SCRAPER_LOW_LIM}\" \

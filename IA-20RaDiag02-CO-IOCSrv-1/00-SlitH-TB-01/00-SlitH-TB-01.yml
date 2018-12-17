@@ -96,8 +96,8 @@ services:
     container_name: diff-ctrl-epics-ioc-${SLIT_INSTANCE}
     command: "\
         -t \"${SLIT_TELNET_PORT}\" \
-        -p \"${SLIT_IN_CTRL_PREFIX}\" \
-        -n \"${SLIT_OUT_CTRL_PREFIX}\" \
+        -p \"${SLIT_OUT_CTRL_PREFIX}\" \
+        -n \"${SLIT_IN_CTRL_PREFIX}\" \
         -P \"${SLIT_AREA_PREFIX}\" \
         -R \"${SLIT_DEVICE_PREFIX}\" \
         -l \"${SLIT_LOW_LIM}\" \
