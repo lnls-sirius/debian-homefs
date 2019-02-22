@@ -1,19 +1,19 @@
 version: '3.4'
 
 services:
-  rsfsl-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/lnlsdig/rsfsl-epics-ioc:${TUNE_PROC_IMAGE_VERSION}
-    container_name: rsfsl-epics-ioc-${TUNE_PROC_INSTANCE}
+  rsfsx-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/rsfsx-epics-ioc:${TUNE_PROC_IMAGE_VERSION}
+    container_name: rsfsx-epics-ioc-${TUNE_PROC_INSTANCE}
     command: "\
         -t ${TUNE_PROC_TELNET_PORT} \
         -i ${TUNE_PROC_IP} \
-        -p ${TUNE_PROC_PORT} \
         -P ${TUNE_PROC_AREA_PREFIX} \
-        -R ${TUNE_PROC_DEVICE_PREFIX}"
+        -R ${TUNE_PROC_DEVICE_PREFIX} \
+        -d ${TUNE_PROC_DEVICE}"
     volumes:
       - type: bind
         source: /media/autosave
-        target: /opt/epics/startup/ioc/rsfsl-epics-ioc/iocBoot/iocrsfsl/autosave
+        target: /opt/epics/startup/ioc/rsfsx-epics-ioc/iocBoot/iocrsfsx/autosave
     network_mode: "host"
 
   valon5009-epics-ioc:
@@ -21,9 +21,11 @@ services:
     container_name: valon5009-epics-ioc-${CARRIER_GEN_INSTANCE}
     command: "\
         -t ${CARRIER_GEN_TELNET_PORT} \
-        -p ${CARRIER_GEN_SERIAL_PORT} \
+        -i ${CARRIER_GEN_IP}
+        -p ${CARRIER_GEN_PORT} \
         -P ${CARRIER_GEN_AREA_PREFIX} \
-        -R ${CARRIER_GEN_DEVICE_PREFIX}"
+        -R ${CARRIER_GEN_DEVICE_PREFIX} \
+        -d ${CARRIER_GEN_DEVICE}"
     volumes:
       - type: bind
         source: /media/autosave
@@ -45,21 +47,41 @@ services:
         target: /opt/epics/startup/ioc/agilent33521a-epics-ioc/iocBoot/iocagilent33521a/autosave
     network_mode: "host"
 
-  noise-src-epics-ioc:
-    image: dockerregistry.lnls-sirius.com.br/lnlsdig/noise-src-epics-ioc:${NOISE_SRC_IMAGE_VERSION}
-    container_name: noise-src-epics-ioc-${NOISE_SRC_INSTANCE}
+  ar-amp-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/ar-amp-epics-ioc:${ARAMP_IMAGE_VERSION}
+    container_name: ar-amp-epics-ioc-${ARAMP_INSTANCE}
     command: "\
-        -t ${NOISE_SRC_TELNET_PORT} \
-        -n ${NOISE_SRC_NOISE_GEN} \
-        -c ${NOISE_SRC_CARRIER_GEN} \
-        -P ${NOISE_SRC_AREA_PREFIX} \
-        -R ${NOISE_SRC_DEVICE_PREFIX}"
+        -t ${ARAMP_TELNET_PORT} \
+        -i ${ARAMP_IP} \
+        -p ${ARAMP_PORT} \
+        -P ${ARAMP_AREA_PREFIX} \
+        -R ${ARAMP_DEVICE_PREFIX} \
+        -d ${ARAMP_DEVICE}"
     volumes:
       - type: bind
         source: /media/autosave
-        target: /opt/epics/startup/ioc/noise-src-epics-ioc/iocBoot/iocNoiseSrc/autosave
+        target: /opt/epics/startup/ioc/ar-amp-epics-ioc/iocBoot/iocARAmp/autosave
+    network_mode: "host"
+
+  tune-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/tune-epics-ioc:${TUNE_IMAGE_VERSION}
+    container_name: tune-epics-ioc-${TUNE_INSTANCE}
+    command: "\
+        -t ${TUNE_TELNET_PORT} \
+        -n ${TUNE_NOISE_GEN} \
+        -c ${TUNE_CARRIER_GEN} \
+        -s ${TUNE_PROC} \
+        -a ${TUNE_ARAMP} \
+        -P ${TUNE_AREA_PREFIX} \
+        -R ${TUNE_DEVICE_PREFIX} \
+        -d ${TUNE_DEVICE}"
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/tune-epics-ioc/iocBoot/iocTune/autosave
     network_mode: "host"
     depends_on:
+      - rsfsx-epics-ioc
       - valon5009-epics-ioc
       - agilent33521a-epics-ioc
-
+      - ar-amp-epics-ioc
