@@ -73,7 +73,7 @@ services:
     volumes:
       - type: bind
         source: /media/autosave
-        target: /opt/epics/startup/ioc/basler-acA1300-75gm-epics-ioc/iocBoot/iocScreen/autosave
+        target: /opt/epics/startup/ioc/screen-epics-ioc/iocBoot/iocScreen/autosave
     network_mode: "host"
     depends_on:
       - galil-dmc30017-epics-ioc
