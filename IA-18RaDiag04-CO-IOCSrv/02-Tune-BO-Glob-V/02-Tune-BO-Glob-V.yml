@@ -72,6 +72,7 @@ services:
         -c ${TUNE_CARRIER_GEN} \
         -s ${TUNE_PROC} \
         -a ${TUNE_ARAMP} \
+        -i ${TUNE_TIM} \
         -P ${TUNE_AREA_PREFIX} \
         -R ${TUNE_DEVICE_PREFIX} \
         -d ${TUNE_DEVICE}" 
