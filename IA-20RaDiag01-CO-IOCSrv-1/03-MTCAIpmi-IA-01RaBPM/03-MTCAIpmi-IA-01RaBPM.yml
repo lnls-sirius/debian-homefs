@@ -1,0 +1,20 @@
+version: '3.4'
+
+services:
+  mtca-ipmi-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/mtca-ipmi-epics-ioc:${MTCA_IPMI_IMAGE_VERSION}
+    container_name: mtca-ipmi-epics-ioc-${MTCA_IPMI_INSTANCE}
+    command: "\
+        -t \"${MTCA_IPMI_TELNET_PORT}\" \
+        -i \"${MTCA_IPMI_IP}\" \
+        -P \"${MTCA_IPMI_AREA_PREFIX}\" \
+        -R \"${MTCA_IPMI_DEVICE_PREFIX}\" \
+        -c \"${MTCA_IPMI_CRATE_ID}\" \
+        -r \"${MTCA_IPMI_RACK_ID}\" \
+        -d \"${MTCA_IPMI_INSTANCE}"
+        "
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/mtca-ipmi-epics-ioc/iocBoot/iocMTCAIpmi/autosave
+    network_mode: "host"
