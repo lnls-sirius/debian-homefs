@@ -11,7 +11,7 @@ services:
         -R \"${MTCA_IPMI_DEVICE_PREFIX}\" \
         -c \"${MTCA_IPMI_CRATE_ID}\" \
         -r \"${MTCA_IPMI_RACK_ID}\" \
-        -d \"${MTCA_IPMI_INSTANCE}"
+        -d \"${MTCA_IPMI_INSTANCE}\" \
         "
     volumes:
       - type: bind
