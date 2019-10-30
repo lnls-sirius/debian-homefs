@@ -6,6 +6,8 @@ services:
     container_name: basler-aca1300-75gm-epics-ioc-${BASLER_ACA1300_75GM_INSTANCE}
     command: "\
         -t \"${BASLER_ACA1300_75GM_TELNET_PORT}\" \
+        -H \"${BASLER_ACA1300_75GM_HTTP_PORT}\" \
+        -n \"${BASLER_ACA1300_75GM_FFMPEG_PORT}\" \
         -s \"${BASLER_ACA1300_75GM_SN}\" \
         -A \"${BASLER_ACA1300_75GM_HL_PREFIX}\" \
         -P \"${BASLER_ACA1300_75GM_AREA_PREFIX}\" \
