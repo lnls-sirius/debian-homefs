@@ -1,0 +1,52 @@
+version: '3.4'
+
+services:
+  rsfsx-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/rsfsx-epics-ioc:${TUNE_PROC_IMAGE_VERSION}
+    container_name: rsfsx-epics-ioc-${TUNE_PROC_INSTANCE}
+    command: "\
+        -t ${TUNE_PROC_TELNET_PORT} \
+        -i ${TUNE_PROC_IP} \
+        -P ${TUNE_PROC_AREA_PREFIX} \
+        -R ${TUNE_PROC_DEVICE_PREFIX} \
+        -d ${TUNE_PROC_DEVICE}"
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/rsfsx-epics-ioc/iocBoot/iocrsfsx/autosave
+    network_mode: "host"
+
+  ar-amp-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/ar-amp-epics-ioc:${ARAMP_IMAGE_VERSION}
+    container_name: ar-amp-epics-ioc-${ARAMP_INSTANCE}
+    command: "\
+        -t ${ARAMP_TELNET_PORT} \
+        -i ${ARAMP_IP} \
+        -p ${ARAMP_PORT} \
+        -P ${ARAMP_AREA_PREFIX} \
+        -R ${ARAMP_DEVICE_PREFIX} \
+        -d ${ARAMP_DEVICE}"
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/ar-amp-epics-ioc/iocBoot/iocARAmp/autosave
+    network_mode: "host"
+
+  tune-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/tune-epics-ioc:${TUNE_IMAGE_VERSION}
+    container_name: tune-epics-ioc-${TUNE_INSTANCE}
+    command: "\
+        -t ${TUNE_TELNET_PORT} \
+        -s ${TUNE_PROC} \
+        -a ${TUNE_ARAMP} \
+        -P ${TUNE_AREA_PREFIX} \
+        -R ${TUNE_DEVICE_PREFIX} \
+        -d ${TUNE_DEVICE}"
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/tune-epics-ioc/iocBoot/iocTune/autosave
+    network_mode: "host"
+    depends_on:
+      - rsfsx-epics-ioc
+      - ar-amp-epics-ioc
