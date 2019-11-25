@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  basler-aca1300-75gm-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/basler-aca1300-75gm-epics-ioc:${BASLER_ACA1300_75GM_IMAGE_VERSION}
+    container_name: basler-aca1300-75gm-epics-ioc-${BASLER_ACA1300_75GM_INSTANCE}
+    command: "\
+        -t \"${BASLER_ACA1300_75GM_TELNET_PORT}\" \
+        -H \"${BASLER_ACA1300_75GM_HTTP_PORT}\" \
+        -n \"${BASLER_ACA1300_75GM_FFMPEG_PORT}\" \
+        -s \"${BASLER_ACA1300_75GM_SN}\" \
+        -A \"${BASLER_ACA1300_75GM_HL_PREFIX}\" \
+        -P \"${BASLER_ACA1300_75GM_AREA_PREFIX}\" \
+        -R \"${BASLER_ACA1300_75GM_DEVICE_PREFIX}\" "
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/basler-acA1300-75gm-epics-ioc/iocBoot/iocBasleracA130075gm/autosave
+    network_mode: "host"
