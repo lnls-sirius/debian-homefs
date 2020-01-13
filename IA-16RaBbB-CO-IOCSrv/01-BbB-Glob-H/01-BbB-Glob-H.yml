@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  ar-amp-epics-ioc:
+    image: dockerregistry.lnls-sirius.com.br/lnlsdig/ar-amp-epics-ioc:${ARAMP_IMAGE_VERSION}
+    container_name: ar-amp-epics-ioc-${ARAMP_INSTANCE}
+    command: "\
+        -t ${ARAMP_TELNET_PORT} \
+        -i ${ARAMP_IP} \
+        -p ${ARAMP_PORT} \
+        -P ${ARAMP_AREA_PREFIX} \
+        -R ${ARAMP_DEVICE_PREFIX} \
+        -d ${ARAMP_DEVICE}"
+    volumes:
+      - type: bind
+        source: /media/autosave
+        target: /opt/epics/startup/ioc/ar-amp-epics-ioc/iocBoot/iocARAmp/autosave
+    network_mode: "host"
