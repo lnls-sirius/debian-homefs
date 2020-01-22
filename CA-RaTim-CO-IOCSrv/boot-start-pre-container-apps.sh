@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Check if registry is active and we can pull from it
+docker pull dockerregistry.lnls-sirius.com.br/lnlsdig/hello-world || exit 1
+
 # Leave swarm just in case we are already in it
 docker swarm leave || true
 
