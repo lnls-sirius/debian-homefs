@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 # Leave swarm
-docker swarm leave
+docker swarm leave || true
