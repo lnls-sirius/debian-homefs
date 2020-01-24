@@ -100,8 +100,11 @@ services:
         -n \"${SLIT_BOTTOM_CTRL_PREFIX}\" \
         -P \"${SLIT_AREA_PREFIX}\" \
         -R \"${SLIT_DEVICE_PREFIX}\" \
+        -d \"${SLIT_DEVICE_TYPE}\" \
         -l \"${SLIT_LOW_LIM}\" \
         -h \"${SLIT_HIGH_LIM}\" \
+        -a \"${SLIT_NEG_LIM}\" \
+        -r \"${SLIT_POS_LIM}\" \
         -g \"${SLIT_EGU}\" "
     volumes:
       - type: bind
