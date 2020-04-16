@@ -100,8 +100,11 @@ services:
         -n \"${SCRAPER_BOTTOM_CTRL_PREFIX}\" \
         -P \"${SCRAPER_AREA_PREFIX}\" \
         -R \"${SCRAPER_DEVICE_PREFIX}\" \
+        -d \"${SCRAPER_DEVICE_TYPE}\" \
         -l \"${SCRAPER_LOW_LIM}\" \
         -h \"${SCRAPER_HIGH_LIM}\" \
+        -a \"${SCRAPER_NEG_LIM}\" \
+        -r \"${SCRAPER_POS_LIM}\" \
         -g \"${SCRAPER_EGU}\" "
     volumes:
       - type: bind
